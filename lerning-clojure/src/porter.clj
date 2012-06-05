@@ -51,4 +51,51 @@
         (consonant? stemmer i)
         (not (#{\w \x \y} (nth (:word stemmer) i))))))
 
+(defn m
+  "Measure the number of consonant sequences between the start
+  of word and position j. If c is a consonant sequence and v a vowel
+  sequence, and <...> indicates arbitrary presence,
+    <c><v>        -> 0
+    <c>vc<v>      -> 1
+    <c>vcvc<v>    -> 2
+    <c>vcvcvc<v>  -> 3
+    ...
+  "
+  [stemmer]
+  (let [
+        j (get-index stemmer)
+        count-v (fn [n i]
+                  (cond (> i j) [:return n i]
+                        (vowel? stemmer i) [:break n i]
+                        :else (recur n (inc i))))
+        count-c (fn [n i]
+                  (cond (> i j) [:return n i]
+                        (consonant? stemmer i) [:break n i]
+                        :else (recur n (inc i))))
+        count-cluster (fn [n i]
+                        (let [[stage1 n1 i1] (count-c n i)]
+                          (if (= stage1 :return)
+                            n1
+                            (let [[stage2 n2 i2] (count-v (inc n1) (inc i1))]
+                              (if (= stage2 :return)
+                                n2
+                                (recur n2 (inc i2)))))))
+        [stage n i] (count-v 0 0)]
+    (if (= stage :return)
+      n
+      (count-cluster n (inc i)))))
+
+(defn ends?
+  "true if the word ends with s."
+  [stemmer s]
+  (let [word (subword stemmer), sv (vec s), j (- (count word) (count sv))]
+    (if (and (pos? j) (= (subvec word j) sv))
+      [(assoc stemmer :index (dec j)) true]
+      [stemmer false])))
+
+(defn set-to
+  "this sets the last j+1 characters to x and readjusts the length of b."
+  [setmmer new-end]
+  (reset-index (into (subword stemmer) new-end)))
+
 
