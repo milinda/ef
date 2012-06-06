@@ -4,8 +4,3 @@ This is a sample web app I developed based on [blog post](http://mmcgrana.github
 [Mark McGranaghan](http://mmcgrana.github.com/). That post was really helpful, but there were some incompatibilities with the latest versions
 of the libraries used. I did some additional improvements to make it wrok as a WAR.
 
-## License
-
-Copyright (C) 2012 Milinda Pathirage
-
-Distributed under the Eclipse Public License, the same as Clojure.
