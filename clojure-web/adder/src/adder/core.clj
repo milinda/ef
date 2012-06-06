@@ -42,7 +42,7 @@
   (view-layout
     [:h2 "two numbers added"]
     [:p.math a " + " b " = " sum]
-    [:a.action {:href "/"} "add more numbers"]))
+    [:a.action {:href "/adder"} "add more numbers"]))
 
 (defn parse-input [a b]
   [(Integer/parseInt a) (Integer/parseInt b)])
