@@ -11,6 +11,12 @@
   (:use ring.middleware.file)
   (:use ring.middleware.file-info))
 
+(def production?
+  (= "production" (get (System/getenv) "APP_ENV")))
+
+(def development?
+  (not production?))
+
 (defn view-layout [& content]
   (html
     (doctype :xhtml-strict)
@@ -25,7 +31,7 @@
 (defn view-input [& [a b]]
   (view-layout
     [:h2 "add two numbers"]
-    [:form {:method "post" :action "/"}
+    [:form {:method "post" :action "/adder"}
      (if (and a b)
        [:p "those are not both numbers!"])
      [:input.math {:type "text" :name "a" :value a}] [:span.math "+"]
@@ -55,7 +61,7 @@
                 (redirect "/")))
 
 (def app (-> #'handler
-           (wrap-file "resources/public")
+           (wrap-if development? wrap-file "resources/public")
            (wrap-file-info)
            (wrap-request-logging)
            (wrap-reload '[adder.core])

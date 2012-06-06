@@ -20,3 +20,8 @@
        :headers {}
        :body ""}
       (handler req))))
+
+(defn wrap-if [handler pred wrapper & args]
+  (if pred
+    (apply wrapper handler args)
+    handler))

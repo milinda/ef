@@ -6,5 +6,7 @@
                  [ring/ring-jetty-adapter "1.1.0"]
                  [compojure "1.1.0"]
                  [hiccup "1.0.0"]]
-  :dev-dependencies [[lein-ring "0.7.1"]])
+  :dev-dependencies [[lein-ring "0.7.1"]]
+  :war-resources-path "resources/public"
+  :ring {:handler adder.core/app :war-exclusions [#"javax.servlet-\w+"]})
 
