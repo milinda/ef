@@ -4,3 +4,10 @@ This is a sample web app I developed based on [blog post](http://mmcgrana.github
 [Mark McGranaghan](http://mmcgrana.github.com/). That post was really helpful, but there were some incompatibilities with the latest versions
 of the libraries used. I did some additional improvements to make it wrok as a WAR.
 
+## Uage
+Execute the following command to generate war file:
+
+[lein ring uberwar adder.war]
+
+After that you can deploy generated *adder.war* file on Tomcat or any
+servlet container.
