@@ -7,7 +7,7 @@ of the libraries used. I did some additional improvements to make it wrok as a W
 ## Uage
 Execute the following command to generate war file:
 
-[lein ring uberwar adder.war]
+     [lein ring uberwar adder.war]
 
 After that you can deploy generated *adder.war* file on Tomcat or any
 servlet container.
