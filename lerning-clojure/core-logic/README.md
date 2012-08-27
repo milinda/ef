@@ -1,13 +1,4 @@
-# core-logic
+# Clojure core.logic excercises
 
-FIXME: write description
+This repository contains code that I wrote to become familiar with Clojure core.logic.
 
-## Usage
-
-FIXME: write
-
-## License
-
-Copyright (C) 2012 FIXME
-
-Distributed under the Eclipse Public License, the same as Clojure.
